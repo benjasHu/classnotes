@@ -37,7 +37,7 @@
 		"zustand": "^4.0.0-rc.1"
 	},
 	"scripts": {
-		"start": "craco start",
+		"start": "node server.js",
 		"build": "craco build",
 		"test": "craco test",
 		"eject": "craco eject"
@@ -65,3 +65,4 @@
 		"sass": "^1.52.1"
 	}
 }
+
