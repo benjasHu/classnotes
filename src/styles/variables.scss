@@ -1,0 +1,107 @@
+:root {
+	// colors
+	--c__white: #fff;
+	--c__black: #000;
+	--c__default: #569cff;
+	--c__default--hover: #77affd;
+	--c__primary: #569cff;
+	--c__info: #569cff;
+	--c__info--hover: #75afff;
+	--c__success: #91ba5b;
+	--c__warning: #f4b93a;
+	--c__error: #ef6461;
+	--c__error--hover: #ff7f7d;
+	--c__help: #8453cd;
+	--c__blue: #087bd5;
+	--c__red: #d75046;
+	--c__red--hover: #f7665c;
+
+	--c__green: #a5c731;
+	--c__green-100: #fbffe8;
+	--c__green-200: #eefdbd;
+	--c__green-400: #476f2b;
+	--c__green-500: #22692f;
+	--c__green-600: #3f5c1e;
+	--c__green-700: #184525;
+	--c__grey: #c9c9c9;
+	--c__grey-50: #fafafa;
+	--c__grey-100: #f8f8f8;
+	--c__grey-150: #f5f5f5;
+	--c__grey-200: #eeeeee;
+	--c__grey-300: #dadada;
+	--c__grey-400: #b9b9b9;
+	--c__grey-450: #969696;
+	--c__grey-500: #767676;
+	--c__grey-700: #3e3e3e;
+	--c__grey-900: #222222;
+
+	// misc
+	--border__radius: 8px;
+	--border__radius--small: 5px;
+	--border__radius--large: 10px;
+	--gutter: 20px;
+	// fonts
+	--font__family: 'Nunito sans', sans-serif;
+	// grid
+	--grid__cols: 12;
+	--grid__gap: 20px;
+	--grid__gap--small: 10px;
+	--grid__gap--large: 30px;
+	--grid__gap--cards: 30px 40px;
+	// media queries
+	--mq__xs: 320px;
+	--mq__sm: 568px;
+	--mq__md: 768px;
+	--mq__lg: 1020px;
+	--mq__xl: 1200px;
+	--mq__xxl: 1400px;
+	--mq__xxxl: 1600px;
+	// app
+	--app__footer-height: 60px;
+	// auth
+	--auth__panel-width: 500px;
+	// text
+	--text__color: var(--c__grey-500);
+	--text__font-size: 14px;
+	// heading
+	--heading__color: var(--c__grey-700);
+	--heading__font-size: 30px;
+	// form
+	--textfield__height: 50px;
+	--textfield__height--small: 40px;
+	// layout
+	--layout__box-gutter: 30px;
+	--layout__box-gutter--medium: 40px;
+	--layout__box-gutter--large: 50px;
+	--layout__box-gutter--huge: 70px;
+	// dashboard
+	--dashboard__sidebar-width: 200px;
+	--dashboard__shadow: 0 0 8px rgba(0, 0, 0, 0.16);
+	--dashboard__shadow--hover: 0 0 12px rgba(0, 0, 0, 0.3);
+	--dashboard__toolbar-height: 70px;
+	// cards
+	--card__gutter: 20px;
+	--card__intro-gutter: 50px;
+	--card__height: 180px;
+	--card__height--feat: 200px;
+	--card__shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+	--card__shadow--hover: 0 5px 10px rgba(0, 0, 0, 0.3);
+	// modal
+	--modal__header-height: 50px;
+	--modal__border-radius: var(--border__radius);
+	--modal__overlay-background: rgba(0, 0, 0, 0.5);
+	// dropdown
+	--dropdown__panel-padding: 12px;
+	// buttons
+	--button__font-size: 16px;
+	--button__font-size--small: 10px;
+	--button__font-size--normal: var(--button__font-size);
+	--button__font-size--large: 18px;
+	--button__border-radius: var(--border__radius);
+	--button__padding: 12px;
+
+	::selection {
+		background-color: var(--c__green);
+		color: var(--c__white);
+	}
+}
