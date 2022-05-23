@@ -19,7 +19,9 @@ const GlobalStyles = createGlobalStyle`
     &:before, &:after {
       box-sizing: border-box;
     }
+  
   }
+
 
   
 
@@ -58,6 +60,7 @@ const GlobalStyles = createGlobalStyle`
     font-family:  var(--font__family);
     width: 100%;
     height: 100vh;
+
   }
 
   #root {

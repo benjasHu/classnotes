@@ -26,6 +26,7 @@ const StyledBoardGridItem = styled.div`
 	background-color: var(--c__grey-200);
 	width: 100%;
 	height: 100%;
+	border-radius: var(--border__radius--large);
 `
 
 const Board = () => {

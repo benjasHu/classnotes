@@ -129,6 +129,7 @@ const StyledBoardCalcHeader = styled.header`
 	width: 100%;
 	padding: var(--gutter);
 	border-bottom: 1px solid var(--c__grey-300);
+	border-radius: var(--border__radius--large) var(--border__radius--large) 0 0;
 
 	button {
 		svg {

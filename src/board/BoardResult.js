@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components/macro'
+import React, { useEffect, useMemo } from 'react'
+import styled, { css } from 'styled-components/macro'
 import { useFormContext, useWatch } from 'react-hook-form'
 
 import yup from '@yup'
@@ -20,8 +20,19 @@ const StyledBoardResult = styled.div`
 	padding: var(--gutter);
 `
 const StyledBoardResultTotal = styled.div`
-	font-size: 80px;
-	font-weight: 900;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+
+	strong {
+		font-size: 80px;
+		font-weight: 900;
+	}
+
+	span {
+		font-size: 16px;
+		font-weight: 400;
+	}
 `
 const StyledBoardResultList = styled.div`
 	display: flex;
@@ -41,10 +52,20 @@ const StyledBoardResultListItem = styled.div`
 	strong {
 		font-weight: 900;
 		font-size: 1.3em;
+		transition: all 150ms ease-out;
 	}
 `
+const StyledBoardResultListItemValue = styled.strong`
+	color: var(--c__success);
+
+	${({ $exceeded }) =>
+		!!$exceeded &&
+		css`
+			color: var(--c__error);
+			font-size: 3em !important;
+		`}
+`
 const StyledBoardResultMaxPercent = styled.div`
-	margin-bottom: 30px;
 	width: 100%;
 `
 
@@ -96,6 +117,15 @@ const BoardResult = () => {
 	const maxPercent = getMaxPercent()
 	const totalPercents = getTotalPercents()
 
+	console.log('maxPercent', parseFloat(maxPercent))
+	console.log('totalPercents', totalPercents)
+
+	const exceededPercent = useMemo(
+		() => totalPercents > parseFloat(maxPercent),
+		[maxPercent, totalPercents]
+	)
+	console.log('exceededPercent', exceededPercent)
+
 	return (
 		<StyledBoardResult>
 			<Form
@@ -106,7 +136,10 @@ const BoardResult = () => {
 			>
 				<BoardResultMaxPercent maxPercent={maxPercent} />
 			</Form>
-			<StyledBoardResultTotal>{totalNote}</StyledBoardResultTotal>
+			<StyledBoardResultTotal>
+				<strong>{totalNote}</strong>
+				<span>Total notas</span>
+			</StyledBoardResultTotal>
 			<StyledBoardResultList>
 				<StyledBoardResultListItem>
 					<span>Porcentaje máximo:</span>
@@ -114,7 +147,9 @@ const BoardResult = () => {
 				</StyledBoardResultListItem>
 				<StyledBoardResultListItem>
 					<span>Porcentaje total añadido:</span>
-					<strong>{totalPercents}%</strong>
+					<StyledBoardResultListItemValue $exceeded={exceededPercent}>
+						{totalPercents}%
+					</StyledBoardResultListItemValue>
 				</StyledBoardResultListItem>
 			</StyledBoardResultList>
 		</StyledBoardResult>
