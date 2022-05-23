@@ -10,6 +10,7 @@ import { MAX_PERCENT } from '@constants'
 import { Form, TextField, Label } from '@components/form'
 import { Button } from '@components/button'
 import { ReactComponent as PlusIcon } from '@svgs/plus.svg'
+import { ReactComponent as CloseIcon } from '@svgs/close.svg'
 
 const schema = yup.object().shape({
 	value: yup
@@ -47,11 +48,40 @@ const StyledBoardCalcInner = styled.div`
 	display: flex;
 	flex-flow: column;
 	align-items: flex-start;
-	gap: 40px;
 	padding-bottom: 40px;
 `
 const StyledBoardCalcItem = styled.section`
 	width: 100%;
+
+	&:hover {
+		& > header {
+			button {
+				opacity: 1;
+			}
+		}
+	}
+`
+const StyledBoardCalcItemHeader = styled.header`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+
+	button {
+		color: var(--c__grey-700);
+		opacity: 0;
+		transition: all 150ms ease-out;
+
+		&:hover {
+			color: var(--c__grey-700);
+			opacity: 0.6 !important;
+		}
+		&:active {
+			color: var(--c__grey-700);
+			opacity: 0.3 !important;
+		}
+	}
 `
 const StyledBoardCalcItemGrid = styled.div`
 	width: 100%;
@@ -110,9 +140,21 @@ const StyledBoardCalcHeader = styled.header`
 const StyledBoardCalcForm = styled(Form)`
 	width: 100%;
 	padding: 0 var(--gutter);
+	padding-bottom: var(--gutter);
+	margin-bottom: var(--gutter);
+	border-bottom: 1px solid var(--c__grey-300);
+
+	&:first-of-type {
+		padding-top: var(--gutter);
+	}
+	&:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
 `
 
 const BoardCalcItem = ({ id, value, percent }) => {
+	const { deleteNote, canDeleteNote } = useNotes()
 	const { control } = useFormContext()
 
 	const valueField = useWatch({
@@ -127,6 +169,10 @@ const BoardCalcItem = ({ id, value, percent }) => {
 	const { getNoteByPercent, updateNote } = useNotes()
 	const noteByPercent = getNoteByPercent(id)
 
+	const handleClickDeleteNote = useCallback(() => {
+		deleteNote(id)
+	}, [deleteNote])
+
 	useEffect(() => {
 		updateNote(id, { value: valueField })
 	}, [valueField])
@@ -137,7 +183,16 @@ const BoardCalcItem = ({ id, value, percent }) => {
 
 	return (
 		<StyledBoardCalcItem>
-			<Label title="Nueva nota" />
+			<StyledBoardCalcItemHeader>
+				<Label title="Nueva nota" />
+				{canDeleteNote && (
+					<Button
+						title="Eliminar nota"
+						icon={<CloseIcon />}
+						onClick={handleClickDeleteNote}
+					/>
+				)}
+			</StyledBoardCalcItemHeader>
 			<StyledBoardCalcItemGrid>
 				<StyledBoardCalcItemGridGroup>
 					<TextField name="value" placeholder="Nota" value={value} />
@@ -160,7 +215,6 @@ const BoardCalcItem = ({ id, value, percent }) => {
 const BoardCalc = () => {
 	const { createNote, resetNotes, getNotes, canAddNotes } = useNotes()
 	const notes = getNotes()
-	const canAddNotesVar = canAddNotes()
 
 	const handleClickCreate = useCallback(() => {
 		createNote()
@@ -185,7 +239,7 @@ const BoardCalc = () => {
 						theme="primary"
 						size="normal"
 						icon={<PlusIcon />}
-						disabled={!canAddNotesVar}
+						disabled={!canAddNotes}
 						onClick={handleClickCreate}
 					/>
 					<Button

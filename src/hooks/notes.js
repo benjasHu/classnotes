@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { nanoid } from 'nanoid'
 import { isNaN } from 'lodash'
 
@@ -10,6 +10,10 @@ export default function useNotes() {
 
 	const getMaxPercent = useCallback(() => notes.maxPercent, [notes.maxPercent])
 	const getNotes = useCallback(() => notes.collection, [notes.collection])
+
+	const canDeleteNote = useMemo(() => {
+		return notes.collection.length > 1
+	}, [notes.collection])
 
 	const createNote = useCallback(() => {
 		set(({ notes }) => {
@@ -59,6 +63,17 @@ export default function useNotes() {
 		})
 	}, [set])
 
+	const deleteNote = useCallback(
+		id => {
+			set(({ notes }) => {
+				if (canDeleteNote) {
+					notes.collection = notes.collection.filter(note => note.id !== id)
+				}
+			})
+		},
+		[set, canDeleteNote]
+	)
+
 	const getNoteByPercent = useCallback(
 		id => {
 			const note = notes.collection.find(note => note.id === id)
@@ -94,21 +109,20 @@ export default function useNotes() {
 		return parseFloat(result.toFixed(2))
 	}, [notes.collection])
 
-	const canAddNotes = useCallback(() => {
+	const canAddNotes = useMemo(() => {
 		const percents = getTotalPercents()
 		const maxPercent = getMaxPercent()
-
-		console.log('percents', percents)
-		console.log('maxPercent', parseFloat(maxPercent))
 
 		return percents < parseFloat(maxPercent)
 	}, [getMaxPercent, getTotalPercents])
 
 	return {
 		getNotes,
+		canDeleteNote,
 		createNote,
 		resetNotes,
 		updateNote,
+		deleteNote,
 		updateMaxPercent,
 		getMaxPercent,
 		getNoteByPercent,
