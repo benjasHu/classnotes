@@ -4,7 +4,9 @@ export const log = config => (set, get, api) =>
 	config(
 		args => {
 			set(args)
-			console.log('[Store] ', get())
+			if (process.env.NODE_ENV === 'development') {
+				console.log('[Store] ', get())
+			}
 		},
 		get,
 		api
