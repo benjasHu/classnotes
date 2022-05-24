@@ -36,7 +36,7 @@ const StyledButton = styled.button`
 	${({ $size }) =>
 		$size === 'small' &&
 		css`
-			font-size: 13px;
+			font-size: 14px;
 			padding: 0.6em 0.7em;
 			border-radius: var(--border__radius--small);
 		`}

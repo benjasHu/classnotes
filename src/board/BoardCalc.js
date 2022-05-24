@@ -39,7 +39,7 @@ const schema = yup.object().shape({
 		.nullable(true)
 		.typeError('Debe ser un número')
 		.moreThan(-1, 'No puede ser un número negativo')
-		.max(MAX_PERCENT, `No puede ser mayor que ${MAX_PERCENT}`)
+		.max(100, `No puede ser mayor que 100`)
 		.required()
 })
 
